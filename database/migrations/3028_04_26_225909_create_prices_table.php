@@ -17,9 +17,10 @@ class CreatePricesTable extends Migration
             $table->id();
             $table->foreignId('ingredient_id')->constrained();
             $table->foreignId('type_price_id')->constrained();
+            $table->text('price');
             $table->timestamps();
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

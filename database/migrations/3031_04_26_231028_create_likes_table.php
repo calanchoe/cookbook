@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->foreignId('recipe_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->integer('num_likes');
+            //$table->integer('num_likes');
             $table->timestamps();
         });
     }
