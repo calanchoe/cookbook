@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IngrCategory extends Model
 {
-    //protected $table = 'ingr_category'
+    protected $table = 'ingr_category';
     public function ingredients()
     {
         

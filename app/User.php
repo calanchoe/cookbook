@@ -38,15 +38,15 @@ class User extends Authenticatable
     ];
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->belongsTo('App\Models\Role');
     }
     public function likes()
     {
-        return $this->belongsToMany('App\Recipe', 'likes_table');
+        return $this->belongsToMany('App\Models\Recipe', 'likes_table');
     }
     public function favorites()
     {
-        return $this->belongsToMany('App\Recipe', 'favorites_table');
+        return $this->belongsToMany('App\Models\Recipe', 'favorites_table');
     }
 
 }

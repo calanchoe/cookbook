@@ -14,8 +14,14 @@
                                     <li class="active"><a href="#">Головна</a></li>
                                     <li><a href="#">Всі рецепти</a></li>
                                     <li><a href="#">Про кухаря</a></li>
-                                    <li><a href="#">Увійти</a></li>
+                                    @if (Route::has('login'))
+                                    @auth
+                                        <li><a href="{{ url('/home') }}">Мій кабінет</a></li>
+                                    @else
+                                        <li><a href="{{ route('login') }}">Увійти</a></li>
                                     <!--<li><a href="#"></a></li>-->
+                                    @endauth
+                                    @endif
                                 </ul>
                             </div>
 
