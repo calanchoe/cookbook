@@ -10,6 +10,6 @@ class IngrCategory extends Model
     public function ingredients()
     {
         
-        return $this->hasMany('App\Model\Ingredient');
+        return $this->hasMany('App\Models\Ingredient');
     }
 }

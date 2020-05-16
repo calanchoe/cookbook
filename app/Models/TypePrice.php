@@ -9,6 +9,6 @@ class TypePrice extends Model
     //
     public function ingredient()
     {
-        return $this->belongsToMany('App\Model\Igredient', 'prices_table', 'type_price_id', 'ingredient_id');
+        return $this->belongsToMany('App\Models\Igredient', 'prices_table', 'type_price_id', 'ingredient_id');
     }
 }

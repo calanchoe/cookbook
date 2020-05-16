@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use App\Models\Step;
+use App\Models\Ingredient;
 
 class RecipeGuestController extends Controller
 {
@@ -50,6 +52,10 @@ class RecipeGuestController extends Controller
     public function show($id)
     {
         //
+        //$recipe = Recipe::findOrFail($id);
+        $recipe = Recipe::where('id', '=', $id)->with(['steps', 'ingredients'])->first();
+        //dd($recipe);
+        return view('recipes.show', compact('recipe'));
     }
 
     /**

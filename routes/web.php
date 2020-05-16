@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 });*/
 //oute::get('/welcome', 'HomeController@index')->name('home');
 Route::get('/', 'RecipeGuestController@index')->name('start-recipes');
-Route::get('/recipes/show-recipe', 'RecipeGuestController@show')->name('resipes.show-recipe');
+//Route::get('/recipes/show-recipe', 'RecipeGuestController@show')->name('resipes.show-recipe');
+Route::resource('recipes', 'RecipeGuestController')->only('show')->names('recipes');
 
 Auth::routes();
 
@@ -27,14 +28,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/admin/index')->name('adminindex');
 Route::view('/admin/index', 'admin/index');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'guest',], function () {
+/*Route::group(['namespace' => 'Admin', 'prefix' => 'guest',], function () {
     $recipemethods = ['index', 'show',];
     Route::resource('/', 'RecipeController')->only($recipemethods)->names('recipes');
     
     //Route::get('/', 'RecipeController@index');
     //Route::get('recipes/show-recipe', 'RecipeController@show');
     Route::get('/recipes/recipes-all', 'RecipeController@index')->name('recipes-all');
-});
+});*/
 
 /*Route::group(['namespace' => 'Admin'], function () {
 

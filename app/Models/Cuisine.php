@@ -9,6 +9,6 @@ class Cuisine extends Model
     //
     public function recipes()
     {
-        return $this->hasMany('App\Model\Recipe');
+        return $this->hasMany('App\Models\Recipe');
     }
 }

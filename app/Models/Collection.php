@@ -9,6 +9,6 @@ class Collection extends Model
     //
     public function recipes()
     {
-        return $this->belongsToMany('App\Model\Collection', 'recip_collect_table', 'collection_id', 'role_id');
+        return $this->belongsToMany('App\Models\Collection', 'recip_collect_table', 'collection_id', 'role_id');
     }
 }

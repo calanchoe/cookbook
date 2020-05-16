@@ -16,7 +16,7 @@
         
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                <a href="{{ route('recipes.recipe-show', $ingrcateg->id) }}"><img class="img_recipe img-thumbnail" src="{{ Storage::url($recipe->photo) }}" alt="img recipe" ></a>
+                <a href="{{ route('recipes.show', ['recipe' => $recipe->id]) }}"><img class="img_recipe img-thumbnail" src="{{ Storage::url($recipe->photo) }}" alt="img recipe" ></a>
                         <h6 class="card-title">{{ $recipe->name }}</h6>
                         <p class="">Час: {{ $recipe->time }}</p>
                         <p class="">Складнысть: {{ $recipe->level }}</p>

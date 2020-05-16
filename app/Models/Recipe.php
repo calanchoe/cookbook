@@ -10,15 +10,15 @@ class Recipe extends Model
     protected $table = 'recipes';
     public function cuisine()
     {
-        return $this->belongsTo('App\Model\Cuisine', 'cuisine_id', 'id');
+        return $this->belongsTo('App\Models\Cuisine', 'cuisine_id', 'id');
     }
     public function recipe_category()
     {
-        return $this->belongsTo('App\Model\RecipeCategory', 'recipe_category_id', 'id');
+        return $this->belongsTo('App\Models\RecipeCategory', 'recipe_category_id', 'id');
     }
     public function steps()
     {
-        return $this->hasMany('App\Model\Step');
+        return $this->hasMany('App\Models\Step');
     }
     public function likes()
     {
@@ -30,16 +30,11 @@ class Recipe extends Model
     }
     public function collections()
     {
-        return $this->belongsToMany('App\Model\Collection', 'recip_collect_table', 'recipe_id', 'collection_id');
+        return $this->belongsToMany('App\Models\Collection', 'recip_collect_table', 'recipe_id', 'collection_id');
     }
     public function ingredients()
     {
-        return $this->belongsToMany('App\Model\Ingredient')
-                        ->using('App\Model\RecipeIngr')
-                        ->withPivot([
-                            'count',
-                            'measure',
-                        ]);
+        return $this->belongsToMany('App\Models\Ingredient', 'recipe_ingr')->using('App\Models\RecipeIngr')->withPivot(['count', 'measure',]);
     }
 
 }

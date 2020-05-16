@@ -1,0 +1,62 @@
+/*header {
+    background-image: image(.\public\img\header.jpg);
+}*/
+body {
+    font-family: Verdana;
+}
+    
+
+/*---------Navigation----------*/
+nav {
+    background-color: rgba(0, 0, 0, 0.466);
+    font-family: Verdana;
+    font-weight: bold;
+    
+    
+}
+/*ul.list-inline a {
+    display: inline;
+}*/
+.list-justify {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around; /*space-between*/
+}
+li a {
+    color: floralwhite;
+}
+.main_nav {
+    text-transform: uppercase;
+    
+}
+.mainheader {
+    background: url(../img/header.jpg) no-repeat center center;
+    /*color: floralwhite;*/
+    background-size: cover;
+}
+.header_text {
+    color: rgb(255, 255, 255);;
+    font-weight: bold;
+    
+}
+h1.display-3.font-italic {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.choose {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+a.btn.btn-danger.btn-lg {
+    font-weight: bold;
+}
+h3 {
+    text-transform: uppercase;
+}
+.jumbotron.text-center.mainheader {
+    margin-top: 3.5em;
+}
+
