@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Cookbook</title>
         
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         
@@ -108,7 +108,7 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="col-md-2 logotype">
-                <a class="navbar-brand" href="#"><img src="{{ asset("img/logo.jpg") }}" alt="Logo CookBook"></a>
+                <a class="navbar-brand" href="{{ route('start-recipes') }}"><img src="{{ asset("img/logo.jpg") }}" alt="Logo CookBook"></a>
             </div>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,7 +148,7 @@
             <div class="jumbotron text-center mainheader">
               <div class="container">
                 <h3 class="header_text">Тільки смачне</h3>
-                <h1 class="display-3 font-italic">Let's cook!</h1>
+                <h1 class="display-3 font-italic letscook">Let's cook!</h1>
                 <p class="choose"><a class="btn btn-danger btn-lg" href="#" role="button">Оберіть інгредієнти</a></p>
               </div>
             </div>

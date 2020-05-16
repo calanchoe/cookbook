@@ -16,58 +16,54 @@
 </head>
 <body>
 
-    <nav ><!-- class="fixed-top" -->
-        <div class="container">
-                <div class="row">
-                    <div class="col-md-2 logotype">
-                        <a href="#"><img src="{{ asset("img/logo.jpg") }}" alt="Logo CookBook"></a>
-                    </div>
-
-
-                    <!-- Main Nav -->
-                    <div class="col-md-8 main_nav">
-                        <ul class="ul list-inline list-justify">
-                            <li class="active"><a href="#">Головна</a></li>
-                            <li><a href="#">Всі рецепти</a></li>
-                            <li><a href="#">Про кухаря</a></li>
-                            @if (Route::has('login'))
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="col-md-2 logotype">
+                <a class="navbar-brand" href="#"><img src="{{ asset("img/logo.jpg") }}" alt="Logo CookBook"></a>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Головна <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Всі рецепти</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Про кухаря</a>
+                </li>
+                @if (Route::has('login'))
                             @auth
-                                <li><a href="{{ url('/home') }}">Мій кабінет</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Мій кабінет</a></li>
                             @else
-                                <li><a href="{{ route('login') }}">Увійти</a></li>
+                                <li class="nav-item "><a class="nav-link" href="{{ route('login') }}">Увійти</a></li>
                             <!--<li><a href="#"></a></li>-->
                             @endauth
                             @endif
-                        </ul>
-                    </div>
-
-                    <!-- Search -->
-                    <div class=" col-md-2 search">
-                        <div class="d-flex flex-row align-items-center justify-content-start">
-                            <a href="#">Пошук</a>
-                        </div>
-                    </div>
-
-
-
-                </div>
-        </div>
-    </nav>
-
-    <!-----MainFrontBaner----->
-    <section id="main">
-        <div class="container">
-            <div class="row">
-                <h3>Тільки смачне</h3>
+              </ul>
+              <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Пошук" aria-label="Search">
+                <button class="btn btn-danger  my-2 my-sm-0" type="submit">Пошук</button>
+              </form>
             </div>
-            <div class="row">
-                <h1 class="display-4 font-italic">Let's cook!</h1>
+          </nav>
+        </header>
+
+        @yield('content')
+
+    <footer class="text-muted">
+            <div class="container">
+              <p class="float-right">
+                <a href="#">Back to top</a>
+              </p>
+              <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+              <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.4/getting-started/introduction/">getting started guide</a>.</p>
             </div>
-            <div class="row">
-               <button>Оберіть інгредієнти</button>
-            </div>
-        </div>
-    </section>
-    
+          </footer>
 </body>
 </html>
