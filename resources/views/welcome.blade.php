@@ -86,16 +86,7 @@
          
         @include('layouts.header')
         <section id="types">
-        @include('recipes.recipes_last')   
-        </section>
-        <section id="types">
-        @include('recipes.recipes_last')   
-        </section>
-        <section id="types">
-        @include('recipes.recipes_last')   
-        </section>
-        <section id="types">
-        @include('recipes.recipes_last')   
+        @include('recipes.recipes-all')  
         </section>
 
 

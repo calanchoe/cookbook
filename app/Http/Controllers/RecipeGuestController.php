@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\IngrCategory;
+use App\Models\Recipe;
 
-class IngredientCategory extends Controller
+class RecipeGuestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +14,11 @@ class IngredientCategory extends Controller
      */
     public function index()
     {
-        //list of all categories for ingredients
-        //dd('1');
-        $ingrcategs = IngrCategory::paginate(5);
-        return view('admin.categories-ingredients.index', compact('ingrcategs'));
-        /*$ingrcategs = IngrCategory::all();
-        return view('admin.categories-ingredients.ingr_categories_add', compact('ingrcategs'));*/
+        //
+        $recipes = Recipe::all();
+        //dd($recipes);
+        return view('welcome', compact('recipes'));
     }
-
-    /*public function show()
-    {
-        //$ingrcategs = App\Models\IngrCategory::all();
-        //return view('admin.index', compact('ingrcategs'));
-    }*/
 
     /**
      * Show the form for creating a new resource.
@@ -36,8 +27,7 @@ class IngredientCategory extends Controller
      */
     public function create()
     {
-        //page of creat new ingredient's category
-        return view('admin.categories-ingredients.create');
+        //
     }
 
     /**
@@ -48,7 +38,7 @@ class IngredientCategory extends Controller
      */
     public function store(Request $request)
     {
-        //page of save new ingr category
+        //
     }
 
     /**
@@ -70,11 +60,7 @@ class IngredientCategory extends Controller
      */
     public function edit($id)
     {
-        //page of edit ingr's category
-        $ingrcateg = IngrCategory::findOrFail($id);
-        $ingrcategorylist = IngrCategory::all();
-        //dd($ingrcateg);
-        return view('admin.categories-ingredients.edit', compact('ingrcateg', 'ingrcategorylist'));
+        //
     }
 
     /**
@@ -87,8 +73,6 @@ class IngredientCategory extends Controller
     public function update(Request $request, $id)
     {
         //
-        dd(__METHOD__, $request->all(), $id);
-        return view('admin.categories-ingredients.update');
     }
 
     /**
@@ -99,7 +83,6 @@ class IngredientCategory extends Controller
      */
     public function destroy($id)
     {
-        //delete
-        return view('admin.categories-ingredients.destroy');
+        //
     }
 }

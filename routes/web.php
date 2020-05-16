@@ -14,15 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/',  function () {
     return view('welcome');
-});
+});*/
+//oute::get('/welcome', 'HomeController@index')->name('home');
+Route::get('/', 'RecipeGuestController@index')->name('start-recipes');
+Route::get('/recipes/show-recipe', 'RecipeGuestController@show')->name('resipes.show-recipe');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/admin/index')->name('adminindex');
 Route::view('/admin/index', 'admin/index');
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'guest',], function () {
+    $recipemethods = ['index', 'show',];
+    Route::resource('/', 'RecipeController')->only($recipemethods)->names('recipes');
+    
+    //Route::get('/', 'RecipeController@index');
+    //Route::get('recipes/show-recipe', 'RecipeController@show');
+    Route::get('/recipes/recipes-all', 'RecipeController@index')->name('recipes-all');
+});
 
 /*Route::group(['namespace' => 'Admin'], function () {
 
@@ -31,10 +43,10 @@ Route::view('/admin/index', 'admin/index');
 $groupeData = ['namespace' => 'Admin', 'prefix' => 'admin',];
 Route::group($groupeData, function(){
     //Igredient categories
-    $methods = ['index', 'edit', 'update', 'creat', 'store',];
+    $methods = ['index', 'edit', 'update', 'create', 'store',];
     Route::resource('ingredientCategory', 'IngredientCategory')->only($methods)->names('admin.categories-ingredients');
-    Route::view('admin/categories-ingredients/index', 'admin.categories-ingredients.index');
-    Route::view('admin/categories-ingredients/create', 'admin.categories-ingredients.create');
+    Route::view('categories-ingredients/index', 'admin.categories-ingredients.index');
+    //Route::view('categories-ingredients/create', 'admin.categories-ingredients.create');
 
 });
 

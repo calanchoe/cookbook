@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     //
+    protected $table = 'recipes';
     public function cuisine()
     {
         return $this->belongsTo('App\Model\Cuisine', 'cuisine_id', 'id');
@@ -30,6 +31,15 @@ class Recipe extends Model
     public function collections()
     {
         return $this->belongsToMany('App\Model\Collection', 'recip_collect_table', 'recipe_id', 'collection_id');
+    }
+    public function ingredients()
+    {
+        return $this->belongsToMany('App\Model\Ingredient')
+                        ->using('App\Model\RecipeIngr')
+                        ->withPivot([
+                            'count',
+                            'measure',
+                        ]);
     }
 
 }
