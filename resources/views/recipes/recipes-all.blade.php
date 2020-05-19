@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="text-center">
-                <h2>Усі рецепти</h2>
+                <h2>Всі рецепти</h2>
             </div>
         </div>
         

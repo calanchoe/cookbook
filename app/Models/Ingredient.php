@@ -11,7 +11,7 @@ class Ingredient extends Model
 
     public function ingr_category()
     {
-        return $this->belongsTo('App\User', 'ingr_category_id', 'id');
+        return $this->belongsTo('App\Models\IngrCategory', 'ingr_category_id', 'id');
     }
     public function type_price()
     {

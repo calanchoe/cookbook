@@ -17,39 +17,39 @@ use Illuminate\Support\Facades\Route;
 /*Route::get('/',  function () {
     return view('welcome');
 });*/
-//oute::get('/welcome', 'HomeController@index')->name('home');
+
 Route::get('/', 'RecipeGuestController@index')->name('start-recipes');
-//Route::get('/recipes/show-recipe', 'RecipeGuestController@show')->name('resipes.show-recipe');
 Route::resource('recipes', 'RecipeGuestController')->only('show')->names('recipes');
+
+Route::get('/recipes/recipes_ingredient/ingr', 'RecipeGuestController@recipeingrs')->name('ingredient.find');
+//Route::view('/recipes/recipes_ingredient', 'RecipeGuestController@recipeingrs')->name('recipes.found');
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/admin/index')->name('adminindex');
+
 Route::view('/admin/index', 'admin/index');
 
-/*Route::group(['namespace' => 'Admin', 'prefix' => 'guest',], function () {
-    $recipemethods = ['index', 'show',];
-    Route::resource('/', 'RecipeController')->only($recipemethods)->names('recipes');
-    
-    //Route::get('/', 'RecipeController@index');
-    //Route::get('recipes/show-recipe', 'RecipeController@show');
-    Route::get('/recipes/recipes-all', 'RecipeController@index')->name('recipes-all');
-});*/
 
-/*Route::group(['namespace' => 'Admin'], function () {
-
-    Route::get('/admin/categories-ingredients/ingr_categories_add', 'IngredientCategory@index');
-});*/
 $groupeData = ['namespace' => 'Admin', 'prefix' => 'admin',];
 Route::group($groupeData, function(){
     //Igredient categories
     $methods = ['index', 'edit', 'update', 'create', 'store',];
     Route::resource('ingredientCategory', 'IngredientCategory')->only($methods)->names('admin.categories-ingredients');
     Route::view('categories-ingredients/index', 'admin.categories-ingredients.index');
-    //Route::view('categories-ingredients/create', 'admin.categories-ingredients.create');
 
 });
+
+$groupeDataIngredients = ['prefix' => 'ingredient',];
+Route::group($groupeDataIngredients, function () {
+    $ingredientsMethods = ['index', 'show'];
+    Route::resource('ingredient', 'IngredientController')->only($ingredientsMethods)->names('ingredient');
+    Route::view('ingredient/index', 'ingredient.index');
+    //Route::get('ingredient/index', 'IngredientController@index')->name('ingredient.find');
+});
+
+
 
 
 //Route::get('/admin/index', 'Admin\IngredientCategory@index');

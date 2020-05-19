@@ -3,46 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Recipe;
-use App\Models\Step;
 use App\Models\Ingredient;
+use App\Models\IngrCategory;
 
-class RecipeGuestController extends Controller
+class IngredientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        $recipes = Recipe::all();
-        //dd($recipes);
-        return view('welcome', compact('recipes'));
-    }
     /**
      * Display a listing of the resource.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function recipeingrs(Request $request)
+    public function index (Request $request)
     {
-
-        $request->all();
-        //dd($request->all());
-        //dd($request);
-
-        $ingrIds = $request->get('ingredient_ids'); //array
-        //dd($ingrIds);
-        $ingrCount = count($ingrIds); //int
-
-        $recipes = Recipe::whereHas('ingredients', function (Builder $query, $ingrIds) {
-            $query = where('id', 'in', $ingrIds);
-        }, '>=', $ingrCount)->get();
+        //
         
-        return view('ingredient.find', compact('request', 'recipes'));
+        $ingredients = Ingredient::all();
+        
+        //$id = Ingredient::get($ingredients, 'id');
+        $ingredientswith = Ingredient::with(['ingr_category'])->get();
+        //dd($reauest);
+        $request->all();
+        $ingr_category_with = IngrCategory::with(['ingredients'])->get();
+        
+        return view('ingredient.index', compact('ingredientswith', 'request', 'ingr_category_with'));
+        //return view('admin.categories-ingredients.index', compact('ingrcategs'));
     }
 
     /**
@@ -75,10 +59,6 @@ class RecipeGuestController extends Controller
     public function show($id)
     {
         //
-        //$recipe = Recipe::findOrFail($id);
-        $recipe = Recipe::where('id', '=', $id)->with(['steps', 'ingredients'])->first();
-        //dd($recipe);
-        return view('recipes.show', compact('recipe'));
     }
 
     /**

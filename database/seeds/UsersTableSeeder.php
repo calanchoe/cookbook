@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         $currentDateTime = Carbon::now()->toDateTimeString();
         $users = [
             [
-                'surname' => 'Адміністратор_прізвище',
+                //'surname' => 'Адміністратор_прізвище',
                 'name' => 'Адміністратор_імя',
                 'role_id' => 1,
                 'email' => 'admin@g.g',
@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => $currentDateTime,
             ],
             [
-                'surname' => 'Модератор_прізвище',
+                //'surname' => 'Модератор_прізвище',
                 'name' => 'модератор_імя',
                 'role_id' => 2,
                 'email' => 'moderator@g.g',
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => $currentDateTime,
             ],
             [
-                'surname' => 'Читач_прізвище',
+                //'surname' => 'Читач_прізвище',
                 'name' => 'Читач_імя',
                 'role_id' => 2,
                 'email' => 'reader@g.g',

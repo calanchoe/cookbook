@@ -31,13 +31,18 @@ li a {
     text-transform: uppercase;
     
 }
+
+.reg-auth {
+    color: #dc3545;
+}
+
 .mainheader {
     background: url(../img/header.jpg) no-repeat center center;
     /*color: floralwhite;*/
     background-size: cover;
 }
 .header_text {
-    color: rgb(255, 255, 255);;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     
 }
@@ -60,3 +65,48 @@ h3 {
     margin-top: 3.5em;
 }
 
+.content {
+    margin-top: 7em;
+}
+.myform {
+    margin-top: 9em;
+}
+
+
+.content {
+    min-height: calc(100vh - 70px);
+  }
+
+  footer {
+    background: url(../img/footer.jpg) no-repeat center center;
+    background-size: cover;
+    padding-top: 5em;
+    padding-bottom: 6em;
+    /*color: rgb(255, 255, 255);*/
+    font-weight: bold;
+    
+  }
+  footer p {
+    color: rgba(20, 17, 17, 0.89);
+    font-size: 11pt;
+    
+  }
+  p.float-right a {
+    background: #28a7469d;
+    color: rgb(255, 255, 255);
+    padding: 0.3em;
+  }
+
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: green!important;
+  }
+  
+  .custom-checkbox .custom-control-input:checked:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 255, 0, 0.25)
+  }
+  .custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25)
+  }
+  .custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+    background-color: #C8FFC8; 
+  }
