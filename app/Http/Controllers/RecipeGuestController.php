@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Step;
 use App\Models\Ingredient;
+use App\Models\RecipeIngr;
+use App\Models\RecipeCategory;
+
+
+
+use Illuminate\Database\Eloquent\Builder;
+//use App\Http\Controllers\DB;
+use Illuminate\Support\Facades\DB;
 
 class RecipeGuestController extends Controller
 {
@@ -31,18 +39,21 @@ class RecipeGuestController extends Controller
     {
 
         $request->all();
-        //dd($request->all());
-        //dd($request);
 
-        $ingrIds = $request->get('ingredient_ids'); //array
+        $valueIngrIds = $request->get('ingredient_ids'); //array
+        $ingrIds = array_keys($valueIngrIds);
         //dd($ingrIds);
         $ingrCount = count($ingrIds); //int
-
-        $recipes = Recipe::whereHas('ingredients', function (Builder $query, $ingrIds) {
-            $query = where('id', 'in', $ingrIds);
-        }, '>=', $ingrCount)->get();
         
-        return view('ingredient.find', compact('request', 'recipes'));
+        $recipeIds = DB::table('recipe_ingr')->select('recipe_id')->whereIn('ingredient_id', $ingrIds)->groupBy('recipe_id')->havingRaw('count(*) >= '.$ingrCount)->pluck('recipe_id');
+
+        $recipes = Recipe::whereIn('id', $recipeIds)->with(['ingredients', 'recipe_category'])->paginate(10);
+        //$recipesFulls = Recipe::where('id', '=', $id)->with(['steps', 'ingredients'])->first();
+
+        //dd($recipes);
+
+
+        return view('recipes.recipes_ingredient', compact('request', 'recipes'));
     }
 
     /**

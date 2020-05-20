@@ -72,6 +72,10 @@
 
                   <div class="dropdown-menu dropdown-menu-right position-absolute"
                       aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item"
+                               href="{{ route('user_save_recipe') }}">
+                                Мій кабінет
+                            </a>
                       <a class="dropdown-item text-danger"
                          href="{{ route('logout') }}"
                          onclick="event.preventDefault();
@@ -87,10 +91,10 @@
               </li>
           @endguest
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
+        <!--<form class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Пошук" aria-label="Search">
           <button class="btn btn-danger  my-2 my-sm-0" type="submit">Пошук</button>
-        </form>
+        </form>-->
       </div>
     </nav>
         
@@ -100,7 +104,7 @@
     <footer class="text-muted">
             <div class="container">
               <p class="float-right">
-                <a href="#">Back to top</a>
+                <a href="#">Вгору</a>
               </p>
               <p>Кулінарні рецепти &copy; CookBoook</p>
               <p>Всі тексти рецептів і фотографії, що розміщені<br> 

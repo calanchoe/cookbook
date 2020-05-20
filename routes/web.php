@@ -22,8 +22,12 @@ Route::get('/', 'RecipeGuestController@index')->name('start-recipes');
 Route::resource('recipes', 'RecipeGuestController')->only('show')->names('recipes');
 
 Route::get('/recipes/recipes_ingredient/ingr', 'RecipeGuestController@recipeingrs')->name('ingredient.find');
-//Route::view('/recipes/recipes_ingredient', 'RecipeGuestController@recipeingrs')->name('recipes.found');
 
+Route::post('/recipes/show/{favorite_id}', 'FavoriteController@store')->name('recipes.favorite.store.add.favorite');
+
+Route::get('/user_save_recipe', 'FavoriteController@index')->name('user_save_recipe');
+//Route::view('/recipes/recipes_ingredient', 'RecipeGuestController@recipeingrs')->name('recipes.found');
+//add-favorite-recipe/{favorite_id}
 
 Auth::routes();
 

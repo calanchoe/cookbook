@@ -26,7 +26,7 @@ class Recipe extends Model
     }
     public function favorites()
     {
-        return $this->belongsToMany('App\User', 'favorites_table');
+        return $this->hasMany('App\Models\Favorite');
     }
     public function collections()
     {
@@ -34,7 +34,7 @@ class Recipe extends Model
     }
     public function ingredients()
     {
-        return $this->belongsToMany('App\Models\Ingredient', 'recipe_ingr')->using('App\Models\RecipeIngr')->withPivot(['count', 'measure',]);
+        return $this->belongsToMany('App\Models\Ingredient', 'recipe_ingr')->using('App\Models\RecipeIngr')->withPivot(['recipe_id', 'ingredient_id', 'count', 'measure',]);
     }
 
 }

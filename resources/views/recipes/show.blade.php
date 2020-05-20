@@ -70,6 +70,30 @@
                                     
                                 
                             </div>
+                            <form action="{{ route('recipes.favorite.store.add.favorite', ['favorite_id' => $recipe->id]) }}" method="POST">
+                                @csrf
+
+                            @if (Route::has('login'))
+                                    @auth
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-outline-success btn-lg">Додати до збереженого</button>
+                                        </div>
+                                    </div>
+
+                                    
+                                @else
+                                <div class="row justify-content-center">
+                                    <div class="col-md-3">
+                                        <p>Увійдіть або зареєструйтесь щоб додати до обранного</p>
+                                        <!--<a class="btn btn-outline-success " href="#" role="button">Додати до збереженого</a>-->
+                                    </div>
+                                </div>
+                            
+                            
+                            @endauth
+                            @endif
+                        </form>
                         </div>
                 
                     </div>

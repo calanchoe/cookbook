@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
     public function favorites()
     {
-        return $this->belongsToMany('App\Models\Recipe', 'favorites_table');
+        return $this->hasMany('App\Models\Favorite');
     }
 
 }

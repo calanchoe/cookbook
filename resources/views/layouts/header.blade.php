@@ -172,6 +172,10 @@
 
                         <div class="dropdown-menu dropdown-menu-right position-absolute"
                             aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               href="{{ route('user_save_recipe') }}">
+                                Мій кабінет
+                            </a>
                             <a class="dropdown-item text-danger"
                                href="{{ route('logout') }}"
                                onclick="event.preventDefault();
