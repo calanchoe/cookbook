@@ -8,6 +8,7 @@ class Recipe extends Model
 {
     //
     protected $table = 'recipes';
+    protected $fillable = ['name', 'time', 'level', 'recipe_category_id', 'photo', 'cuisine_id', 'video'];
     public function cuisine()
     {
         return $this->belongsTo('App\Models\Cuisine', 'cuisine_id', 'id');
@@ -30,7 +31,7 @@ class Recipe extends Model
     }
     public function collections()
     {
-        return $this->belongsToMany('App\Models\Collection', 'recip_collect_table', 'recipe_id', 'collection_id');
+        return $this->belongsToMany('App\Models\Collection', 'recipe_collect', 'recipe_id', 'collection_id');
     }
     public function ingredients()
     {

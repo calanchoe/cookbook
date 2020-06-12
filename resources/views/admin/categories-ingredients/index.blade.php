@@ -18,7 +18,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Категорія</th>
-                                            <th>Батько</th>
+                                            <!--<th>Батько</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -31,7 +31,7 @@
                                                 {{ $ingrcateg->name }}
                                             </a>  
                                             </td>
-                                            <td>{{ $ingrcateg->id}}</td>
+                                            <!--<td>{{ $ingrcateg->id}}</td>-->
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -23,10 +23,10 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    @include('admin.categories-ingredients.includes.ingrcateg_edit_main_col')
+                    @include('admin.categories-ingredients.ingrcateg_edit_main_col')
                 </div>
                 <div class="col-md-3">
-                    @include('admin.categories-ingredients.includes.ingrcateg_edit_add_col')
+                    @include('admin.categories-ingredients.ingrcateg_edit_add_col')
                 </div>
             </div>
 

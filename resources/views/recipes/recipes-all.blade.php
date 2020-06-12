@@ -19,7 +19,7 @@
                 <a href="{{ route('recipes.show', ['recipe' => $recipe->id]) }}"><img class="img_recipe img-thumbnail" src="{{ Storage::url($recipe->photo) }}" alt="img recipe" ></a>
                         <h6 class="card-title">{{ $recipe->name }}</h6>
                         <p class="">Час: {{ $recipe->time }}</p>
-                        <p class="">Складнысть: {{ $recipe->level }}</p>
+                        <p class="">Складність: {{ $recipe->level }}</p>
                 </div>
             </div>
         @endforeach

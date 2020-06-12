@@ -17,7 +17,7 @@ class IngredientCategory extends Controller
     {
         //list of all categories for ingredients
         //dd('1');
-        $ingrcategs = IngrCategory::paginate(5);
+        $ingrcategs = IngrCategory::paginate(10);
         return view('admin.categories-ingredients.index', compact('ingrcategs'));
         /*$ingrcategs = IngrCategory::all();
         return view('admin.categories-ingredients.ingr_categories_add', compact('ingrcategs'));*/

@@ -44,7 +44,7 @@
             <a class="nav-link" href="{{ route('start-recipes') }}">Головна <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Збірки рецептів</a>
+            <a class="nav-link" href="{{ route('collection.all-collection') }}">Збірки рецептів</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Про кухаря</a>

@@ -7,7 +7,7 @@
 
     
         <div class="starter-template text-center p-md-4">
-          <h1>Здережені рецепти</h1>
+          <h1>Збережені рецепти</h1>
         </div>
       
   
@@ -20,17 +20,15 @@
                     <div class="col-md-6">
                         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                             <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="mb-0"><a href="{{ route('recipes.show', ['recipe' => $userRecipe->recipe->id]) }}">{{ $userRecipe->recipe->name }}</a></h3>
-                            <p class="card-text mb-auto">Складність:{{ $userRecipe->level }}</p>
+                                <h3 class="mb-0"><a href="{{ route('recipes.show', ['recipe' => $userRecipe->recipe->id]) }}">{{ $userRecipe->recipe->name }}</a></h3>
+                                <p class="card-text mb-auto">Складність:{{ $userRecipe->recipe->level }}</p>
             
-                            <!--<p class="card-text mb-auto">Категорія:</p>-->
-                            <p class="card-text mb-auto">Час:{{ $userRecipe->recipe->time }}</p>
+                                 <!--<p class="card-text mb-auto">Категорія:</p>-->
+                                <p class="card-text mb-auto">Час:{{ $userRecipe->recipe->time }}</p>
                             
                             </div>
-            
-                            </div>
                             <div class="col-auto d-none d-lg-block">
-                            <img src="{{ Storage::url($userRecipe->recipe->photo) }}" class="img-fluid" alt="Recipe image">
+                                <img src="{{ Storage::url($userRecipe->recipe->photo) }}" class="img-fluid" alt="Recipe image">
                             </div>
                         </div>
                     </div>

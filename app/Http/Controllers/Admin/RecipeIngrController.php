@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Favorite;
-use App\User;
 use App\Models\Recipe;
+use App\Models\Ingredient;
+use App\Models\RecipeIngr;
+use App\Models\IngrCategory;
 
-use Illuminate\Support\Facades\Auth;
-
-
-class FavoriteController extends Controller
+class RecipeIngrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +19,7 @@ class FavoriteController extends Controller
     public function index()
     {
         //
-        $userId = Auth::user()->id;
-        $favoriteUserResipes = Favorite::where('user_id', $userId)->with(['recipe'])->paginate(10);
-        //dd($favoriteUserResipes);
-
-        return view('user_save_recipe', compact('favoriteUserResipes'));
+        
     }
 
     /**
@@ -35,6 +30,14 @@ class FavoriteController extends Controller
     public function create()
     {
         //
+        $recipeIdget = session()->pull('recipeId');
+        $ingredients = Ingredient::all();
+        $ingr_category_with = IngrCategory::with(['ingredients'])->get();
+        //dd($recipeIdget);
+       // $categoryIgrs = IngrCategory::where('id', $id)->with(['ingredients'])->first();
+        //dd($categoryIgrs);
+
+        return view('admin.recipes.recipes-ingredient', compact('ingredientswith', 'ingr_category_with', 'recipeIdget'));
     }
 
     /**
@@ -43,12 +46,21 @@ class FavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $favorite_id)
+    public function store(Request $request)
     {
         //
-        //dd(Auth::user());
-        $newFavorite = Favorite::create(['recipe_id' => $favorite_id, 'user_id' => Auth::user()->id]);
-        //dd($newFavorite);
+        $data = $request->all();
+        dd($data);
+        /*$recipe = new Recipe();
+        $data = $request->all();
+        $result = $recipe->fill($data)->save();
+          
+        //dd($recipeId);
+        if ($result) {
+            return redirect()->route('admin.recipe.ingr')->with(['success' => 'Успішно збережено.']);
+        } else {
+            return back()->withErrors(['msg' => "Помилка збереження запису."])->withInput();
+        }*/
     }
 
     /**

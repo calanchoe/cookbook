@@ -143,12 +143,40 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="{{ route('start-recipes') }}">Головна <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Збірки рецептів</a>
-                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="{{ route('collection.all-collection') }}">Збірки рецептів</a>
+                </li>-->
+                <li class="nav-item dropdown">
+                  <a id="navbarDropdown"
+                     class="nav-link dropdown-toggle text-light"
+                     href="#" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false" v-pre>
+                      всі рецепти <span class="caret"></span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right position-absolute"
+                            aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               href="{{ route('collection.all-collection') }}">
+                               Збірки рецептів
+                            </a>
+                            <a class="dropdown-item"
+                               href="#">
+                                Категорії рецептів
+                            </a>
+                            
+                        </div>
+                    </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Про кухаря</a>
                 </li>
+                
+              </ul>
+              <!--<form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Пошук" aria-label="Search">
+                <button class="btn btn-danger  my-2 my-sm-0" type="submit">Пошук</button>
+              </form>-->
+
+              <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
@@ -191,10 +219,6 @@
                     </li>
                 @endguest
               </ul>
-              <!--<form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Пошук" aria-label="Search">
-                <button class="btn btn-danger  my-2 my-sm-0" type="submit">Пошук</button>
-              </form>-->
             </div>
           </nav>
         

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Favorite;
-use App\User;
+
 use App\Models\Recipe;
+use App\Models\Collection;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
-
-class FavoriteController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +19,10 @@ class FavoriteController extends Controller
     public function index()
     {
         //
-        $userId = Auth::user()->id;
-        $favoriteUserResipes = Favorite::where('user_id', $userId)->with(['recipe'])->paginate(10);
-        //dd($favoriteUserResipes);
+        $collections = Collection::all();
+        //dd($collections);
+        return view('collection.all-collection', compact('collections'));
 
-        return view('user_save_recipe', compact('favoriteUserResipes'));
     }
 
     /**
@@ -35,6 +33,7 @@ class FavoriteController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -43,12 +42,9 @@ class FavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $favorite_id)
+    public function store(Request $request)
     {
         //
-        //dd(Auth::user());
-        $newFavorite = Favorite::create(['recipe_id' => $favorite_id, 'user_id' => Auth::user()->id]);
-        //dd($newFavorite);
     }
 
     /**
@@ -59,7 +55,15 @@ class FavoriteController extends Controller
      */
     public function show($id)
     {
-        //
+        //first()
+        $collection = Collection::where('id', $id)->with(['recipes'])->first();
+        
+
+        //$collection => Collection::first();
+        //dd($collection);
+       
+        
+        return view('collection.show-collection', compact('collection'));
     }
 
     /**

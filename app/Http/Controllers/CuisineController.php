@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Favorite;
-use App\User;
-use App\Models\Recipe;
 
-use Illuminate\Support\Facades\Auth;
-
-
-class FavoriteController extends Controller
+class CuisineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +14,6 @@ class FavoriteController extends Controller
     public function index()
     {
         //
-        $userId = Auth::user()->id;
-        $favoriteUserResipes = Favorite::where('user_id', $userId)->with(['recipe'])->paginate(10);
-        //dd($favoriteUserResipes);
-
-        return view('user_save_recipe', compact('favoriteUserResipes'));
     }
 
     /**
@@ -43,12 +32,9 @@ class FavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $favorite_id)
+    public function store(Request $request)
     {
         //
-        //dd(Auth::user());
-        $newFavorite = Favorite::create(['recipe_id' => $favorite_id, 'user_id' => Auth::user()->id]);
-        //dd($newFavorite);
     }
 
     /**

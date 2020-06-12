@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use App\Models\RecipeCategory;
+use App\Models\Cuisine;
 
 class RecipeController extends Controller
 {
@@ -16,13 +18,13 @@ class RecipeController extends Controller
     public function index()
     {
         //
-        $recipes = Recipe::all();
-        dd('1');
-        return view('admin.recipes.recipes-all', compact('recipes'));
-        //$recipe = Recipe::find($id);
-        //$recipelist = Recipe::all();
-        //dd($ingrcateg);
-        //return view('recipes.index', compact('recipe', 'recipelist'));
+        /*$recipes = Recipe::all();
+        return view('admin.recipes.recipes-all', compact('recipes'));*/
+
+        $recipes = Recipe::paginate(10);
+        //dd($recipes);
+        return view('admin.recipes.all-recipes', compact('recipes'));
+        
     }
 
     /**
@@ -33,6 +35,10 @@ class RecipeController extends Controller
     public function create()
     {
         //
+        $igrcategories = RecipeCategory::all();
+        $cuisines = Cuisine::all();
+        //dd($igrcategories);
+        return view('admin.recipes.add-recipes', compact('igrcategories', 'cuisines'));
     }
 
     /**
@@ -43,7 +49,22 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recipe = new Recipe();
+        $data = $request->all();
+        $result = $recipe->fill($data)->save();
+        
+        //$recipeId = $recipe->id;
+        
+        //$sessionRecipeId = session('recipeId');
+        session(['recipeId' => $recipe->id,]);
+        
+        //dd($recipeId);
+        if ($result) {
+            return redirect()->route('admin.recipe.ingr')->with(['success' => 'Успішно збережено.']);
+        } else {
+            return back()->withErrors(['msg' => "Помилка збереження запису."])->withInput();
+        }
+        
     }
 
     /**
