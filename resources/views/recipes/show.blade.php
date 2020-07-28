@@ -67,35 +67,69 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    
+                                        <div class="embed-responsive embed-responsive-16by9 hide-print">
+                                            <iframe width="560" height="315" src="{{ $recipe->video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            
+                                        </div>
+                                        <br>
+                                        
                                 
                             </div>
-                            <form action="{{ route('recipes.favorite.store.add.favorite', ['favorite_id' => $recipe->id]) }}" method="POST">
-                                @csrf
-
-                            @if (Route::has('login'))
-                                    @auth
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-outline-success btn-lg">Додати до збереженого</button>
-                                        </div>
-                                    </div>
-
-                                    
+                            <div class="container">
+                            
+                                <button type="submit" class="btn btn-outline-success btn-lg hide-print" onclick=" window.print(); ">
+                                    Друкувати рецепт
+                                </button>
+                            </div>
+                            <br>
+                            @auth
+                                @if ($favoriteCount == true)
+                                    <form class="hide-print" action="{{ route('recipe.favorite.delete', ['id' => $recipe->id]) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        
+                                                <button type="submit" class="btn btn-success">Видалити зі збереженого</button>
+                                        
+                                    </form>
+                                    @else
+                                    <form class="hide-print" action="{{ route('recipes.favorite.store.add.favorite', ['favorite_id' => $recipe->id]) }}" method="POST">
+                                        @csrf
+                                            <button type="submit" class="btn btn-outline-success">Додати до збереженого</button>                   
+                                   </form>
+                                @endif
+                                
+                                @if ($recipeLikeCountUser == true)
+                                    <form class="hide-print" action="{{ route('recipe.like.delete', ['id' => $recipe->id]) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        
+                                                <button type="submit" class="btn btn-danger">Like: {{ $recipeLikesCount }}</button>
+                                        
+                                    </form>
                                 @else
-                                <div class="row justify-content-center">
-                                    <div class="col-md-3">
-                                        <p>Увійдіть або зареєструйтесь щоб додати до обранного</p>
-                                        <!--<a class="btn btn-outline-success " href="#" role="button">Додати до збереженого</a>-->
-                                    </div>
-                                </div>
-                            
-                            
+                                    <form class="hide-print" action="{{ route('recipes.like.store.add.like') }}" method="POST">
+                                        @csrf
+                                        <input type="text" class="form-control" style="display: none"  name="id" value="{{ $recipe->id }}">
+                                            <button type="submit" class="btn btn-outline-danger">Like: {{ $recipeLikesCount }}</button>                   
+                                </form>
+                                @endif
                             @endauth
-                            @endif
-                        </form>
+
+                            @guest
+                            <div class="row justify-content-start">
+                                <div class="col-md-9">
+                                    <p>Увійдіть або зареєструйтесь щоб додати до обранного</p>                                   
+                                </div>  
+                                    
+                                <div class="col-md-4">
+                                    <p style="color: green">Likes: {{ $recipeLikesCount }} </p>
+                                </div>
+                            </div>
+
+                            @endguest
+                           
+                        
                         </div>
-                
                     </div>
 
             
@@ -104,6 +138,6 @@
         </div>
     </div>
 </div>
-
+<br>
 @endsection
 

@@ -46,8 +46,9 @@ class FavoriteController extends Controller
     public function store(Request $request, $favorite_id)
     {
         //
-        //dd(Auth::user());
+        //dd($favorite_id);
         $newFavorite = Favorite::create(['recipe_id' => $favorite_id, 'user_id' => Auth::user()->id]);
+        return back();
         //dd($newFavorite);
     }
 
@@ -94,5 +95,11 @@ class FavoriteController extends Controller
     public function destroy($id)
     {
         //
+        //dd($id);
+        $userId = Auth::user()->id;
+        $favorite = Favorite::where([['user_id', $userId], ['recipe_id', $id]])->first();
+        //dd($favorite);
+        $favorite->delete();
+        return back();
     }
 }

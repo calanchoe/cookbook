@@ -8,8 +8,11 @@ use App\Models\Step;
 use App\Models\Ingredient;
 use App\Models\RecipeIngr;
 use App\Models\RecipeCategory;
+use App\User;
+use App\Models\Favorite;
+use App\Models\Like;
 
-
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\Eloquent\Builder;
 //use App\Http\Controllers\DB;
@@ -86,10 +89,19 @@ class RecipeGuestController extends Controller
     public function show($id)
     {
         //
-        //$recipe = Recipe::findOrFail($id);
+        
         $recipe = Recipe::where('id', '=', $id)->with(['steps', 'ingredients'])->first();
-        //dd($recipe);
-        return view('recipes.show', compact('recipe'));
+        
+        $userId = Auth::user()->id ?? 0;
+        //$favorite = Favorite::where([['user_id', 5$userId], ['recipe_id', $id]]);
+        $favorite = Favorite::where([['user_id', $userId], ['recipe_id', $id]])->get();
+        $favoriteCount = (bool)$favorite->count();
+        $recipeLikes = Like::where('recipe_id', $id)->get();
+        $recipeLikesCount = $recipeLikes->count();
+        $recipeLikesUser = Like::where([['user_id', $userId], ['recipe_id', $id]])->get();
+        $recipeLikeCountUser = (bool)$recipeLikesUser->count();
+        //dd($recipeLikesCount);
+        return view('recipes.show', compact('recipe', 'favoriteCount', 'recipeLikesCount', 'recipeLikeCountUser'));
     }
 
     /**

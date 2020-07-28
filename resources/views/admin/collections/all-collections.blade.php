@@ -7,10 +7,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 
-                <a class="btn btn-outline-danger" href="{{ route('admin.add.resipe') }}">Додати рецепт</a>
+                <a class="btn btn-outline-danger" href="{{ route('admin.add.collection') }}">Створити збірку</a>
+                <br>
                 <br>
                 <div class="card">
-                    <div class="card-header text-center">Рецепти</div>
+                    <div class="card-header text-center">Збірки</div>
                     <div class="card-body">
                         <div class="table table-hover">
                             <table class="table table-striped table-bordered" style="width:100%" id="orders">
@@ -18,22 +19,20 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Назва</th>
-                                        <th>Категорія</th>
-                                        <th>Кухня</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($recipes as $recipe)
-                                    @php /** @var \App\Models\Recipe $recipe */ @endphp
+                                    @foreach ($collections as $collection)
+                                    @php /** @var \App\Models\Collection $collection */ @endphp
                                         <tr>
-                                        <td>{{ $recipe->id }}</td>
+                                        <td>{{ $collection->id }}</td>
                                         <td>
-                                        <a href="{{ route('admin.categories-ingredients.edit', $recipe->id) }}">
-                                            {{ $recipe->name }}
+                                        <a href="{{ route('admin.categories-ingredients.edit', $collection->id) }}">
+                                            {{ $collection->name }}
                                         </a>  
                                         </td>
-                                        <td>{{ $recipe->recipe_category->name}}</td>
-                                        <td>{{ $recipe->cuisine->name}}</td>
+                                        
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -43,13 +42,13 @@
                 </div>
             </div>
         </div>
-        @if ($recipes->total() > $recipes->count())
+        @if ($collections->total() > $collections->count())
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                {{ $recipes->links() }}
+                                {{ $collections->links() }}
                             </div>
                         </div>
                     </div>
@@ -59,4 +58,5 @@
                 
             @endif
     </div>
+    <br>
 @endsection

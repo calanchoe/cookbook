@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Models\Recipe;
-use App\Models\Ingredient;
-use App\Models\RecipeIngr;
-use App\Models\IngrCategory;
+use App\Models\RecipeCategory;
+use App\Models\RecipeCollect;
+use App\Models\Collection;
 use Illuminate\Support\Facades\DB;
 
-class RecipeIngrController extends Controller
+class RecipeCollectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,6 @@ class RecipeIngrController extends Controller
     public function index()
     {
         //
-        
     }
 
     /**
@@ -30,15 +30,12 @@ class RecipeIngrController extends Controller
      */
     public function create()
     {
-        //
-        //$recipeIdget = session()->pull('recipeId');
-        $ingredients = Ingredient::all();
-        $ingr_category_with = IngrCategory::with(['ingredients'])->get();
-        //dd($recipeIdget);
-       // $categoryIgrs = IngrCategory::where('id', $id)->with(['ingredients'])->first();
-        //dd($categoryIgrs);
-
-        return view('admin.recipes.recipes-ingredient', compact('ingredientswith', 'ingr_category_with', 'recipeIdget'));
+        // 
+        $reсipes = Recipe::all();
+        //dd($reсipes);
+        $recipe_category_with = RecipeCategory::with(['recipes'])->get();
+        
+        return view('admin.collections.add-collection-recipes', compact('reсipes', 'recipe_category_with'));
     }
 
     /**
@@ -52,28 +49,19 @@ class RecipeIngrController extends Controller
         //
         $data = $request->all();
         
-        $counts = array_values(array_filter($data['count']));
-        $measures = array_values(array_filter($data['measure']));
-        $idIngrs = $data['ingredient_ids'];
-        $recipeId = session('recipeId');
-        //dd($recipeId);
-        $results = [];
-        
-        $recipe = Recipe::find(session('recipeId'));
+        $idRecipes = $data['recipe_ids'];
+        $collectionId = session('collectionId');
+        //dd($collectionId);
+        $collection = Collection::find(session('collectionId'));
         DB::beginTransaction();
-        for ($i=0; $i < count($idIngrs); $i++) { 
-            $recipeIngr = new RecipeIngr();
+        for ($i=0; $i < count($idRecipes); $i++) { 
+            $recipeCollect = new RecipeCollect();
             //dd($idIngrs);
-            $recipe->ingredients()->attach($idIngrs[$i], ['count' => $counts[$i], 'measure' => $measures[$i]]);
-            /*$recipeInrg->recipe_id = $recipeId;
-            $recipeInrg->ingr_id = $idIngrs[$i];
-            $recipeInrg->count = $counts[$i];
-            $recipeInrg->measure = $measure[$i];*/
-            //$results[] = $recipeInrg -> save();
+            $collection->recipes()->attach($idRecipes[$i]);
         } 
-       
-            DB::commit();
-            return view('admin.recipes.recipe-steps');
+        DB::commit();
+        session()->forget(['collectionId']);
+        return view('admin.index');
     }
 
     /**

@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     //
-    /*public function recipe()
+    protected $table = 'likes';
+    public function recipe()
     {
-        return $this->belongsTo('App\Recipe');
+        return $this->belongsTo('App\Models\Recipe');
     }
     public function user()
     {
         return $this->belongsTo('App\User');
-    }*/
+    }
+    protected $fillable = ['recipe_id', 'user_id'];
 }

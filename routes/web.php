@@ -24,6 +24,13 @@ Route::resource('recipes', 'RecipeGuestController')->only('show')->names('recipe
 Route::get('/recipes/recipes_ingredient/ingr', 'RecipeGuestController@recipeingrs')->name('ingredient.find');
 
 Route::post('/recipes/show/{favorite_id}', 'FavoriteController@store')->name('recipes.favorite.store.add.favorite');
+Route::put('/recipes/show/{id}', 'FavoriteController@destroy')->name('recipe.favorite.delete');
+
+Route::post('/recipes/add-like', 'LikeController@store')->name('recipes.like.store.add.like');
+Route::delete('/recipes/delete-like/{id}', 'LikeController@destroy')->name('recipe.like.delete');
+
+Route::get('/categories-recipes/all-categories', 'CategoriesController@index')->name('all.categories.recipes');
+Route::get('/categories-recipes/show-category', 'CategoriesController@showcategoryresipes')->name('category.recipes');
 
 Route::get('/user_save_recipe', 'FavoriteController@index')->name('user_save_recipe');
 Route::get('/collection/all-collection', 'CollectionController@index')->name('collection.all-collection');
@@ -53,11 +60,22 @@ Route::group($groupeData, function(){
     Route::post('recipes/recipes-ingredient', 'RecipeIngrController@store')->name('admin.add.reсipe.ingr.store');
     Route::get('recipes/recipe-steps', 'StepController@create')->name('admin.add.resipe.step');
     Route::post('recipes/recipe-steps', 'StepController@store')->name('admin.add.reсipe.step.store');
+    Route::get('index', 'StepController@reternToAdminRecipes')->name('admin.recipes.return');
+
 
     //create cuisine
     //create recipe categy
     //create collection
+    Route::get('collections/all-collections', 'CollectionController@index')->name('admin.all-collections');
+    Route::get('collections/add-collection', 'CollectionController@create')->name('admin.add.collection');
+    Route::post('collections/add-collection', 'CollectionController@store')->name('admin.add.collection.store');
+    Route::get('collections/add-collection-recipes', 'RecipeCollectController@create')->name('admin.add.collection.recipes');
+    Route::post('collections/add-collection-recipes', 'RecipeCollectController@store')->name('admin.add.collection.recipes.store');
     //user control
+    Route::get('users/all-users', 'UserController@index')->name('admin.users');
+    Route::get('users/user-edit/{user}', 'UserController@edit')->name('admin.user.edit');
+    Route::patch('users/user-edit', 'UserController@update')->name('admin.add.user.update');
+    Route::put('/recipes/user-edit/{id}', 'UserController@destroy')->name('admin.add.user.delete');
     
 
 });

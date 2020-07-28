@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Favorite extends Model
 {
     //favorites_table
@@ -17,6 +16,5 @@ class Favorite extends Model
     {
         return $this->belongsTo('App\User');
     }
-
     protected $fillable = ['recipe_id', 'user_id'];
 }

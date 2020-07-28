@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Like;
+use App\User;
 use App\Models\Recipe;
-use App\Models\Step;
 
-class StepController extends Controller
+use Illuminate\Support\Facades\Auth;
+
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,27 +40,18 @@ class StepController extends Controller
     public function store(Request $request)
     {
         //
-        //dd($request);
-        $data = $request->all();
-        
-        //$recipeId = session('recipeId');
-        $recipe = Recipe::find(session('recipeId'));
-        $step = new Step();
-        //$step -> recipe_id = $recipeId;
-        $step -> num_step = $data['num_step'];
-        $step -> description_step = $data['description_step'];
-        $step -> photo = $data['photo'];
-        //dd($step);
-        $recipe->steps()->save($step);
-        
-        return view('admin.recipes.recipe-steps');
+        //$like_id = $request->all('id');
+        $userId =  Auth::user()->id;
+        $newLike = new Like();
+        $newLike -> user_id = $userId;
+        $newLike -> recipe_id = $request->all()['id'];
+        //$recipe->save($newLike);
+        //dd($like_id);
+        $newLike->save();
+        //$newLike = Like::create(['recipe_id' => $like_id, 'user_id' => $userId]);
+        return back();
     }
-    public function reternToAdminRecipes()
-    {
-        //session() -> unset('recipeId');
-        session()->forget(['recipeId']);
-        return view('admin.index');
-    }
+
     /**
      * Display the specified resource.
      *
@@ -102,5 +95,10 @@ class StepController extends Controller
     public function destroy($id)
     {
         //
+        $userId = Auth::user()->id;
+        $like = Like::where([['user_id', $userId], ['recipe_id', $id]])->first();
+        
+        $like->delete();
+        return back();
     }
 }

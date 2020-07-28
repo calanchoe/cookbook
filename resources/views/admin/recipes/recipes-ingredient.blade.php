@@ -24,17 +24,17 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-3">                                 
                                             <div class="custom-control custom-checkbox ">
-                                            <input type="checkbox" class="custom-control-input" name="ingredient_ids[{{ $ingredient->id }}]" id="{{ $ingredient->id }}">
+                                            <input type="checkbox" class="custom-control-input" name="ingredient_ids[]" id="{{ $ingredient->id }}" value = "{{ $ingredient->id }}">
                                                 <label class="custom-control-label" for="{{ $ingredient->id }}">{{ $ingredient->name }}</label>
                                             </div>  
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputCount">Кількість</label>
-                                        <input type="text" class="form-control" id="inputCount" name="count{{ $ingredient->id }}" placeholder="1,5">
+                                        <input type="text" class="form-control" id="inputCount" name="count[]" placeholder="1,5">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="inputMeasure">Міра</label>
-                                            <input type="text" class="form-control" id="inputMeasure" name="measure{{ $ingredient->id }}" placeholder="кг/л/ст.л./г">
+                                            <input type="text" class="form-control" id="inputMeasure" name="measure[]" placeholder="кг/л/ст.л./г">
                                         </div>
                                     </div>
                                 @endforeach

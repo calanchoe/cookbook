@@ -12,6 +12,7 @@ class RecipeController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,7 +22,7 @@ class RecipeController extends Controller
         /*$recipes = Recipe::all();
         return view('admin.recipes.recipes-all', compact('recipes'));*/
 
-        $recipes = Recipe::paginate(10);
+        $recipes = Recipe::with(['recipe_category', 'cuisine'])->paginate(10);
         //dd($recipes);
         return view('admin.recipes.all-recipes', compact('recipes'));
         
@@ -37,6 +38,7 @@ class RecipeController extends Controller
         //
         $igrcategories = RecipeCategory::all();
         $cuisines = Cuisine::all();
+        
         //dd($igrcategories);
         return view('admin.recipes.add-recipes', compact('igrcategories', 'cuisines'));
     }
@@ -51,6 +53,7 @@ class RecipeController extends Controller
     {
         $recipe = new Recipe();
         $data = $request->all();
+        //dd($data);
         $result = $recipe->fill($data)->save();
         
         //$recipeId = $recipe->id;

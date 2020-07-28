@@ -24,6 +24,7 @@ class CollectionController extends Controller
         return view('collection.all-collection', compact('collections'));
 
     }
+    
 
     /**
      * Show the form for creating a new resource.

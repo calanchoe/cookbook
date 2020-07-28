@@ -23,7 +23,7 @@ class Recipe extends Model
     }
     public function likes()
     {
-        return $this->belongsToMany('App\User', 'likes_table');
+        return $this->hasMany('App\Models\Like');
     }
     public function favorites()
     {

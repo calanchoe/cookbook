@@ -1,39 +1,42 @@
-@extends('layouts.header')
+@extends('layouts.navbar')
 
 @section('content')
-   
-
+<div class="content">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 
-                <a class="btn btn-outline-danger" href="{{ route('admin.add.resipe') }}">Додати рецепт</a>
+                
                 <br>
                 <div class="card">
-                    <div class="card-header text-center">Рецепти</div>
+                    <div class="card-header text-center">Користувачі</div>
                     <div class="card-body">
                         <div class="table table-hover">
                             <table class="table table-striped table-bordered" style="width:100%" id="orders">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Назва</th>
-                                        <th>Категорія</th>
-                                        <th>Кухня</th>
+                                        <th>Ім'я</th>
+                                        <th>Роль</th>
+                                        <th>email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($recipes as $recipe)
-                                    @php /** @var \App\Models\Recipe $recipe */ @endphp
+                                    @foreach ($users as $user)
+                                    @php /** @var \App\User $user */ @endphp
                                         <tr>
-                                        <td>{{ $recipe->id }}</td>
+                                        <td>{{ $user->id }}</td>
                                         <td>
-                                        <a href="{{ route('admin.categories-ingredients.edit', $recipe->id) }}">
-                                            {{ $recipe->name }}
+                                        <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}">
+                                            {{ $user->name }}
                                         </a>  
                                         </td>
-                                        <td>{{ $recipe->recipe_category->name}}</td>
-                                        <td>{{ $recipe->cuisine->name}}</td>
+                                        @foreach ($roles as $role)
+                                        @if ($user->role_id == $role->id )
+                                        <td>{{ $role->name }}</td>
+                                        @endif
+                                        @endforeach
+                                        <td>{{ $user->email}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -43,13 +46,13 @@
                 </div>
             </div>
         </div>
-        @if ($recipes->total() > $recipes->count())
+        @if ($users->total() > $users->count())
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                {{ $recipes->links() }}
+                                {{ $users->links() }}
                             </div>
                         </div>
                     </div>
@@ -59,4 +62,5 @@
                 
             @endif
     </div>
+</div>
 @endsection

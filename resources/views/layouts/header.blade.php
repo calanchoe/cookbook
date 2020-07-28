@@ -44,6 +44,12 @@
                 font-size: 3.5rem;
               }
             }
+
+            @media print {
+              .hide-print{
+                  display: none;
+              }
+            }
             
             /*nav {
                 background-color: rgba(0, 0, 0, 0.0.466);
@@ -130,7 +136,7 @@
 
 
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-6">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-6 hide-print">
             
                 <a class="navbar-brand" href="{{ route('start-recipes') }}"><img src="{{ asset("img/logo.jpg") }}" alt="Logo CookBook"></a>
             
@@ -160,9 +166,10 @@
                                Збірки рецептів
                             </a>
                             <a class="dropdown-item"
-                               href="#">
+                               href="{{ route('all.categories.recipes') }}">
                                 Категорії рецептів
                             </a>
+                            
                             
                         </div>
                     </li>
@@ -223,7 +230,7 @@
           </nav>
         
 
-        <div class="main">
+        <div class="main hide-print">
 
             <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron text-center mainheader">
@@ -238,7 +245,7 @@
 
         @yield('content')
 
-        <footer class="text-muted">
+        <footer class="text-muted hide-print">
             <div class="container">
               <p class="float-right">
                 <a href="#">Вгору</a>

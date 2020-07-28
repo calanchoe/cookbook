@@ -10882,3 +10882,8 @@ a.text-dark:focus {
   }
 }
 
+@media print {
+  .hide-print{
+      display: none;
+  }
+}

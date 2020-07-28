@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Recipe;
+use App\Models\Collection;
+
+use Illuminate\Database\Eloquent\Builder;
+
 class CollectionController extends Controller
 {
     /**
@@ -15,6 +20,10 @@ class CollectionController extends Controller
     public function index()
     {
         //
+        $collections = Collection::paginate(10);
+        //dd($collections);
+        return view('admin.collections.all-collections', compact('collections'));
+
     }
 
     /**
@@ -25,6 +34,7 @@ class CollectionController extends Controller
     public function create()
     {
         //
+        return view('admin.collections.add-collection');
     }
 
     /**
@@ -36,6 +46,26 @@ class CollectionController extends Controller
     public function store(Request $request)
     {
         //
+        $collection = new Collection();
+        $data = $request->all();
+        //dd($data);
+        $collection -> name = $data['name'];
+        $collection -> description = $data['description'];
+        $collection->save();
+        //$result = $collection->fill($data)->save();
+        
+        //$recipeId = $recipe->id;
+        
+        //$sessionRecipeId = session('recipeId');
+        session(['collectionId' => $collection->id,]);
+        return redirect()->route('admin.add.collection.recipes')->with(['success' => 'Успішно збережено.']);
+        //return view('admin.collections.add-collection-recipes');
+        //dd($recipeId);
+        /*if ($result) {
+            return redirect()->route('admin.collections.add-collection-recipes')->with(['success' => 'Успішно збережено.']);
+        } else {
+            return back()->withErrors(['msg' => "Помилка збереження запису."])->withInput();
+        }*/
     }
 
     /**

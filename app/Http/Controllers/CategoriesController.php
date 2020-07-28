@@ -3,18 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recipe;
+use App\Models\RecipeCategory;
+use App\Models\Cuisine;
+use App\Models\Ingredient;
+use App\Models\RecipeIngr;
+//use App\Http\Controllers\DB;
 
 class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $categories = RecipeCategory::all();
+        //dd($categories);
+        $request->all();
+        return view('categories-recipes.all-categories', compact('categories', 'request'));
+
     }
+    /**
+     * Display a listing of the resource.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showcategoryresipes(Request $request)
+    {
+
+        $request->all();
+        
+        $valueCategIds = $request->get('category_ids'); //array
+        $categIds = array_keys($valueCategIds);
+        
+        $recipes = Recipe::with(['ingredients', 'recipe_category', 'cuisine'])->whereIn('recipe_category_id', $categIds)->get();
+        
+
+
+        return view('categories-recipes.show-category', compact('request', 'recipes'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
